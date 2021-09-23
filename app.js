@@ -16,7 +16,14 @@ db.on('error', () => {console.log('MongoDB error!')})
 db.once('open', () => {console.log('MongoDB connected!')})
 
 // setting template engine ///
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.engine('hbs', exphbs({ 
+    defaultLayout: 'main', 
+    extname: '.hbs',   
+    runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true
+    }}
+))
 app.set('view engine', 'hbs')
 
 // setting static files ///
@@ -99,6 +106,18 @@ app.post('/restaurants/:id/delete', (req, res) => {
            .then(restaurant => restaurant.remove())
            .then(() => res.redirect('/'))
            .catch(error => console.log(error))
+})
+// search
+app.get('/search', (req, res) => {
+    const keyword = req.query.keyword.trim().toLowerCase()
+    Restaurant.find()
+      .then(restaurants => {
+        const filteredRestaurants = restaurants.filter(restaurant =>
+          restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword)
+        )
+        res.render('index', {restaurants: filteredRestaurants, keyword})
+      })
+      .catch(error => console.log(error))
 })
 
 // start and listen on the Express server ///
