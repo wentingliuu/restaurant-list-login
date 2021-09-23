@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.error(error))
 })
-// new.hbs
+// new.hbs (create)
 app.get('/restaurants/new', (req, res) => {return res.render('new')})
 app.post('/restaurants', (req, res) => {
   const name = req.body.name
@@ -47,6 +47,14 @@ app.post('/restaurants', (req, res) => {
   const description = req.body.description
   return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })
            .then(() => res.redirect('/'))
+           .catch(error => console.log(error))
+})
+// detail.hbs (read)
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+           .lean()
+           .then(restaurant => res.render('detail', {restaurant}))
            .catch(error => console.log(error))
 })
 
