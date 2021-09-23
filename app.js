@@ -1,11 +1,11 @@
 // require packages used in the project ///
 const express = require('express')
-const mongoose = require('mongoose')
+const mongoose = require('mongoose') 
 const app = express()
 const port = 3000
 
-// require express-handlebars here
-const exphbs = require('express-handlebars')
+const exphbs = require('express-handlebars') // require express-handlebars
+const Restaurant = require('./models/restaurant') // require DB data
 
 // connect to Database ///
 mongoose.connect('mongodb://localhost/restaurant-list')
@@ -24,7 +24,10 @@ app.use(express.static('public'))
 // routes setting /// 
 // Index.hbs
 app.get('/', (req, res) => {
-  res.render('index')
+  Restaurant.find()
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.error(error))
 })
 
 // start and listen on the Express server ///
