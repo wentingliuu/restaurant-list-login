@@ -18,6 +18,9 @@ db.once('open', () => {console.log('MongoDB connected!')})
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 
+// setting static files ///
+app.use(express.static('public'))
+
 // routes setting /// 
 // Index.hbs
 app.get('/', (req, res) => {
