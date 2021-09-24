@@ -1,29 +1,64 @@
-<form class="m-5" action="/restaurants/{{ restaurant._id }}/edit" method="POST">
-  <div class="ml-5">
-    <label for="name">餐廳名稱</label>
-    <input class="ml-2" name="name" id="name" type="text" placeholder="請輸入欲修改的中文名稱" value="{{ restaurant.name }}">
-    <label class="ml-5" for="name_en">英文名稱</label>
-    <input class="ml-2" name="name_en" id="name_en" type="text" placeholder="請輸入欲修改的英文名稱" value="{{ restaurant.name_en }}">
-    <label class="ml-5" for="category">餐廳類別</label>
-    <input class="ml-2" name="category" id="category" type="text" placeholder="請輸入欲修改的餐廳類別" value="{{ restaurant.category }}">
-  </div>
-  <div class="ml-5 mt-4">
-  <label for="image">餐廳圖片</label>
-  <input class="ml-2" name="image" id="image" type="text" placeholder="請輸入欲修改的餐廳圖片" value="{{ restaurant.image }}">
-  <label class="ml-5" for="location">餐廳地址</label>
-  <input class="ml-2" name="location" id="location" type="text" placeholder="請輸入欲修改的餐廳地址" value="{{ restaurant.location }}">
-  <label class="ml-5" for="phone">餐廳電話</label>
-  <input class="ml-2" name="phone" id="phone" type="text" placeholder="請輸入欲修改的餐廳電話" value="{{ restaurant.phone }}">
-  </div>
-  <div class="ml-5 mt-4">
-  <label for="google_map">Google Map</label>
-  <input class="ml-2" name="google_map" id="google_map" type="text" placeholder="請輸入欲修改的 Google Map 超連結" value="{{ restaurant.google_map }}">
-  <label class="ml-4" for="rating">餐廳評分</label>
-  <input class="ml-2" name="rating" id="rating" type="text" placeholder="請輸入欲修改的餐廳評分(1-5 顆星)" value="{{ restaurant.rating }}">
-  <label class="ml-5" for="description">餐廳敘述</label>
-  <input class="ml-2" name="description" id="description" type="text" placeholder="請輸入欲修改的餐廳敘述" value="{{ restaurant.description }}">
-  </div>
-  <div class="ml-5 mt-4">
-    <button class="btn btn-danger btn-sm" type="submit">Save</button>
-  </div>
-</form>
+<h1 class="mb-1 restaurant-show-title">編輯餐廳</h1>
+<div class="container mt-0 d-flex justify-content-center">
+  <form class="m-5" action="/restaurants/{{ restaurant._id }}/edit" method="POST">
+    <div class="form-row justify-content-between" style="width: 55vw;">
+      <div class="col-5">
+        <label for="name">餐廳名稱</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="請輸入欲修改的中文名稱" value="{{restaurant.name}}" required />
+      </div>
+      <div class="col-5">
+        <label for="name_en">英文名稱</label>
+        <input type="text" class="form-control" id="name_en" name="name_en" placeholder="請輸入欲修改的英文名稱" value="{{restaurant.name_en}}" required />          
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <div class="col-5">
+        <label for="phone">餐廳電話</label>
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="請輸入欲修改的餐廳電話"
+          value="{{restaurant.phone}}" required />
+      </div>
+      <div class="col-5">
+        <label for="location">餐廳地址</label>
+        <input type="text" class="form-control" id="location" name="location" placeholder="請輸入欲修改的餐廳地址"
+          value="{{restaurant.location}}" required />
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <div class="col-7">
+        <label for="category">餐廳類別</label>
+        <select id="category" name="category" class="form-control col-5">
+          <option value="{{ restaurant.category }}">({{ restaurant.category }})</option>
+          <option value="中東料理">中東料理</option>
+          <option value="日本料理">日本料理</option>
+          <option value="義式餐廳">義式餐廳</option>
+          <option value="美式">美式</option>
+          <option value="酒吧">酒吧</option>
+          <option value="咖啡">咖啡</option>
+        </select>
+      </div>
+      <div class="col-5">
+        <label for="rating">餐廳評分</label>
+        <input type="range" class="form-control-range" id="rating" name="rating" min="0" max="5" step="0.1" value="{{restaurant.rating}}" oninput="this.nextElementSibling.value = this.value" required />
+        <output class="text-info" style="font-size: 1rem; font-weight:bold;">{{restaurant.rating}}</output> <i class="fas fa-star text-info" style="font-size: 1rem; font-weight:bold;"></i>
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <div class="col-5">
+        <label for="image">餐廳圖片</label>
+        <input type="text" class="form-control" id="image" name="image" placeholder="請輸入欲修改的餐廳圖片"
+          value="{{restaurant.image}}" required />
+      </div>
+      <div class="col-5">
+        <label for="google_map">Google Map</label>
+        <input type="text" class="form-control" id="google_map" name="google_map" placeholder="請輸入欲修改的 Google Map 超連結" value="{{restaurant.google_map}}" required />
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <label for="description">餐廳敘述</label>
+      <textarea class="form-control" rows="4" name="description" id="description" type="text" placeholder="請輸入欲修改的餐廳敘述" value="{{ restaurant.description }}" required>{{ restaurant.description }}</textarea>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-danger btn-sm" type="submit">Save</button>
+    </div>
+  </form>
+</div>

@@ -1,30 +1,62 @@
-<form class="m-5" action="/restaurants" method="POST">
-  <div class="ml-5">
-    <label for="name">餐廳名稱</label>
-    <input class="ml-2" name="name" id="name" type="text" placeholder="請輸入餐廳中文名稱" required>
-    <label class="ml-5" for="name_en">英文名稱</label>
-    <input class="ml-2" name="name_en" id="name_en" type="text" placeholder="請輸入餐廳英文名稱" required>
-    <label class="ml-5" for="category">餐廳類別</label>
-    <input class="ml-2" name="category" id="category" type="text" placeholder="請輸入餐廳類別" required>
-  </div>
-  <div class="ml-5 mt-4">
-    <label for="image">餐廳圖片</label>
-    <input class="ml-2" name="image" id="image" type="text" placeholder="請輸入超連結" required>
-    <label class="ml-5" for="location">餐廳地址</label>
-    <input class="ml-2" name="location" id="location" type="text" placeholder="請輸入餐廳地址" required>
-    <label class="ml-5" for="phone">餐廳電話</label>
-    <input class="ml-2" name="phone" id="phone" type="text" placeholder="請輸入餐廳電話" required>
-  </div>
-  <div class="ml-5 mt-4">
-    <label for="google_map">Google Map</label>
-    <input class="ml-2" name="google_map" id="google_map" type="text" placeholder="請輸入超連結" required>
-    <label class="ml-4" for="rating">餐廳評分</label>
-    <input class="ml-2" name="rating" id="rating" type="text" placeholder="請評價 1-5 顆星" required>
-    <label class="ml-5" for="description">餐廳敘述</label>
-    <input class="ml-2" name="description" id="description" type="text" placeholder="請填寫 50-100 字描述" required>
-  </div>
-  <div class="ml-5 mt-4">
-    <button class="btn btn-danger btn-sm" type="submit">Create</button>
-    <a type="button" class="btn btn-outline-danger btn-sm" href="/">Back</a>
-  </div>
-</form>
+<h1 class="mb-1 restaurant-show-title">新增餐廳</h1>
+<div class="container d-flex justify-content-center">
+  <form class="m-5" action="/restaurants" method="POST">
+    <div class="form-row justify-content-between" style="width: 55vw;">
+      <div class="col-5">
+        <label for="name">餐廳名稱</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="請輸入餐廳中文名稱" required />
+      </div>
+      <div class="col-5">
+        <label for="name_en">英文名稱</label>
+        <input type="text" class="form-control" id="name_en" name="name_en" placeholder="請輸入餐廳英文名稱" required />
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <div class="col-5">
+        <label for="phone">餐廳電話</label>
+        <input type="text" class="form-control" id="phone" name="phone" placeholder="請輸入餐廳電話" required />
+      </div>
+      <div class="col-5">
+        <label for="location">餐廳地址</label>
+        <input type="text" class="form-control" id="location" name="location" placeholder="請輸入餐廳地址" required />
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <div class="col-7">
+        <label for="category">餐廳類別</label>
+        <select id="category" name="category" class="form-control col-5" required>
+          <option value="" disabled selected>請選擇餐廳類別</option>
+          <option value="中東料理">中東料理</option>
+          <option value="日本料理">日本料理</option>
+          <option value="義式餐廳">義式餐廳</option>
+          <option value="美式">美式</option>
+          <option value="酒吧">酒吧</option>
+          <option value="咖啡">咖啡</option>
+        </select>
+      </div>
+      <div class="col-5">
+        <label for="rating">餐廳評分（0-5顆星）</label>
+        <input type="range" class="form-control-range" id="rating" name="rating" min="0" max="5" step="0.1" oninput="this.nextElementSibling.value = this.value" required />
+        <output class="text-info" style="font-size: 1rem; font-weight:bold;">{{restaurant.rating}}</output> <i class="fas fa-star text-info" style="font-size: 1rem; font-weight:bold;"></i>
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <div class="col-5">
+        <label for="image">餐廳圖片</label>
+        <input type="text" class="form-control" id="image" name="image" placeholder="請輸入圖片超連結" required />
+      </div>
+      <div class="col-5">
+        <label for="google_map">Google Map</label>
+        <input type="text" class="form-control" id="google_map" name="google_map" placeholder="請輸入 Google Map 超連結" required />
+      </div>
+    </div>
+    <div class="form-row justify-content-between mt-4" style="width: 55vw;">
+      <label for="description">餐廳敘述</label>
+      <textarea class="form-control" rows="4" name="description" id="description" type="text" placeholder="請填寫 30-300 字描述" required>{{ restaurant.description }}</textarea>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-danger btn-sm" type="submit">Create</button>
+      <a type="button" class="btn btn-outline-danger btn-sm" href="/">Back</a>
+    </div>
+  </form>
+</div>
