@@ -1,12 +1,13 @@
 // require packages used in the project ///
 const express = require('express')
+const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 const app = express()
 const port = 3000
 
-const exphbs = require('express-handlebars') // require express-handlebars
-const Restaurant = require('./models/restaurant') // require DB data
-const bodyParser = require('body-parser') // require body parser
+const Restaurant = require('./models/restaurant')
+const bodyParser = require('body-parser')
+const methodOverride = require('method-override') 
 
 // connect to Database ///
 mongoose.connect('mongodb://localhost/restaurant-list')
@@ -32,6 +33,8 @@ app.use(express.static('public'))
 
 // setting body parser ///
 app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(methodOverride('_method'))
 
 // routes setting ///
 // index.hbs
@@ -82,11 +85,34 @@ app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
   Restaurant.find({
     $or: [{ name: { $regex: keyword, $options: 'i' } },
-      { category: { $regex: keyword, $options: 'i' } }]
+      { name_en: { $regex: keyword, $options: 'i' } },
+      { location: { $regex: keyword, $options: 'i' } }]
   })
     .lean()
     .then(restaurants => res.render('index', { restaurants, keyword }))
     .catch(error => console.log(error))
+})
+// sort
+app.get('/sort/:result', (req, res) =>{
+  const filter = req.params.result.split('_')[0]
+  const sub = req.params.result.split('_')[1]
+  if ( filter === 'name' ) {
+    Restaurant.find()
+    .lean()
+    .sort({ name: sub })
+    .then(restaurants => res.render('index', { restaurants, sort : sub }))
+    .catch(error => console.error(error))
+  } else if ( filter === 'category') {
+    Restaurant.find({ category: { $regex: sub, $options: 'i' } })
+    .lean()
+      .then(restaurants => res.render('index', { restaurants, category: sub}))
+      .catch(error => console.log(error))
+  } else if ( filter === 'rating') {
+    Restaurant.find({ rating: {$gte: sub} })
+      .lean()
+      .then(restaurants => res.render('index', { restaurants, rating: sub}))
+      .catch(error => console.log(error))
+  }
 })
 
 // start and listen on the Express server ///

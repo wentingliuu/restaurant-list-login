@@ -5,7 +5,7 @@
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類" aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
+          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳中/英文名稱、地區" aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
@@ -15,9 +15,58 @@
   </div>
 </div>
 
+{{#if restaurants}}
+
+<div class="d-flex m-auto justify-content-between align-items-center" style="max-width: 750px;">
+  <div class="d-flex justify-content-center mt-5 mx-5">
+    <a class="btn btn-danger btn-sm" href="./restaurants/new" role="button"><i class="fas fa-plus"></i> 新增餐廳</a>
+  </div>
+  <div class="d-flex justify-content-center align-items-center mt-5 mx-5">
+    <span style="color: #dc3545; font-size: 16px; font-weight:500;"> 篩選條件：</span>
+    <div class="dropdown mx-1">
+      <button class="btn btn-outline-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{#if sort}} {{ sort }} {{ else }} Sort {{/if}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/sort/name_asc">A-Z</a>
+        <a class="dropdown-item" href="/sort/name_desc">Z-A</a>
+      </div>
+    </div>
+    <div class="dropdown mx-1">
+      <button class="btn btn-outline-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{#if category}} {{ category }} {{ else }} Category {{/if}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/sort/category_中東料理">中東料理</a>
+        <a class="dropdown-item" href="/sort/category_日本料理">日本料理</a>
+        <a class="dropdown-item" href="/sort/category_義式餐廳">義式餐廳</a>
+        <a class="dropdown-item" href="/sort/category_美式">美式</a>
+        <a class="dropdown-item" href="/sort/category_酒吧">酒吧</a>
+        <a class="dropdown-item" href="/sort/category_咖啡">咖啡</a>
+      </div>
+    </div>
+    <div class="dropdown mx-1">
+      <button class="btn btn-outline-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{#if rating}} ≥ {{ rating }} 顆星 {{ else }} Rating {{/if}}
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/sort/rating_3">≥ 3顆星</a>
+        <a class="dropdown-item" href="/sort/rating_3.5">≥ 3.5顆星</a>
+        <a class="dropdown-item" href="/sort/rating_4">≥ 4顆星</a>
+        <a class="dropdown-item" href="/sort/rating_4.5">≥ 4.5顆星</a>
+        <a class="dropdown-item" href="/sort/rating_5">5顆星</a>
+      </div>
+    </div>
+    <div class="d-flex mx-1">
+      <a class="btn btn-danger btn-sm" href="/">Clear</a>
+    </div>
+  </div>
+</div>
+
 <!-- restaurant list -->
-<div class="container mt-5">
-  {{#if restaurants}}
+<div class="container mt-5 mb-2">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
@@ -49,12 +98,10 @@
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center my-5">
-  <a class="btn btn-outline-danger btn-sm" href="./restaurants/new" role="button">新增餐廳</a>
-  </div>
+  
   {{else}}
   <!-- cannot find the restaurant through keyword -->
-  <div class="d-flex flex-column align-items-center p-5 bg-light">
+  <div class="d-flex flex-column align-items-center mt-5 p-5 bg-light">
     <h1 class="p-1">搜尋不到符合的餐廳</h1>
     <p class="p-1">請嘗試輸入其他關鍵字</p>
     <a class="btn btn-secondary btn-sm" href="/" role="button"> back <i class="fas fa-undo"></i></a>
