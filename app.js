@@ -80,13 +80,12 @@ app.post('/restaurants/:id/delete', (req, res) => {
 // search
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
-  Restaurant.find()
-    .then(restaurants => {
-      const filteredRestaurants = restaurants.filter(restaurant =>
-        restaurant.name.toLowerCase().includes(keyword) || restaurant.category.toLowerCase().includes(keyword)
-      )
-      res.render('index', { restaurants: filteredRestaurants, keyword })
-    })
+  Restaurant.find({
+    $or: [{ name: { $regex: keyword, $options: 'i' } },
+      { category: { $regex: keyword, $options: 'i' } }]
+  })
+    .lean()
+    .then(restaurants => res.render('index', { restaurants, keyword }))
     .catch(error => console.log(error))
 })
 
