@@ -1,6 +1,5 @@
 # Restaurant List (CRUD)
-A website for you to keep all your favorite restaurants.
-with restaurant's name, address, phone, image, category, rating, and so on.
+A website for you to keep all your favorite restaurants with restaurant's name, address, phone, image, category, rating, and so on.
 
 ## Features
 *  CREATE: write down the restaurant info at the create page 
@@ -31,7 +30,7 @@ cd ~/mongodb/bin/
 ```
 ./mongod --dbpath <path to mongodb-data directory>
 ```
-MongoDB has started successfully, while the terminal shows `waiting for connections on port 27017`
+MongoDB has started successfully, while the terminal shows `waiting for connections on port 27017`.
 4. Insert seeder
 ```
 npm run seed
