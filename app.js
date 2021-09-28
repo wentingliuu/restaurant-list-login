@@ -7,7 +7,7 @@ const port = 3000
 
 const Restaurant = require('./models/restaurant')
 const bodyParser = require('body-parser')
-const methodOverride = require('method-override') 
+const methodOverride = require('method-override')
 
 // connect to Database ///
 mongoose.connect('mongodb://localhost/restaurant-list')
@@ -33,7 +33,7 @@ app.use(express.static('public'))
 
 // setting body parser ///
 app.use(bodyParser.urlencoded({ extended: true }))
-
+// setting method override ///
 app.use(methodOverride('_method'))
 
 // routes setting ///
@@ -67,14 +67,14 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findByIdAndUpdate(id, { $set: req.body })
     .then(() => res.redirect(`/restaurants/${id}`))
     .catch(error => console.log(error))
 })
 // delete
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findByIdAndRemove(id)
     .then(() => res.redirect('/'))
@@ -93,24 +93,24 @@ app.get('/search', (req, res) => {
     .catch(error => console.log(error))
 })
 // sort
-app.get('/sort/:result', (req, res) =>{
+app.get('/sort/:result', (req, res) => {
   const filter = req.params.result.split('_')[0]
   const sub = req.params.result.split('_')[1]
-  if ( filter === 'name' ) {
+  if (filter === 'name') {
     Restaurant.find()
-    .lean()
-    .sort({ name: sub })
-    .then(restaurants => res.render('index', { restaurants, sort : sub }))
-    .catch(error => console.error(error))
-  } else if ( filter === 'category') {
-    Restaurant.find({ category: { $regex: sub, $options: 'i' } })
-    .lean()
-      .then(restaurants => res.render('index', { restaurants, category: sub}))
-      .catch(error => console.log(error))
-  } else if ( filter === 'rating') {
-    Restaurant.find({ rating: {$gte: sub} })
       .lean()
-      .then(restaurants => res.render('index', { restaurants, rating: sub}))
+      .sort({ [filter]: sub })
+      .then(restaurants => res.render('index', { restaurants, sort: sub }))
+      .catch(error => console.error(error))
+  } else if (filter === 'category') {
+    Restaurant.find({ [filter]: { $regex: sub, $options: 'i' } })
+      .lean()
+      .then(restaurants => res.render('index', { restaurants, [filter]: sub }))
+      .catch(error => console.log(error))
+  } else if (filter === 'rating') {
+    Restaurant.find({ [filter]: { $gte: sub } })
+      .lean()
+      .then(restaurants => res.render('index', { restaurants, [filter]: sub }))
       .catch(error => console.log(error))
   }
 })

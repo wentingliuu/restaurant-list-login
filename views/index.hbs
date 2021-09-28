@@ -5,7 +5,7 @@
       <form action="/search">
         <h4 class="mb-2">尋找餐廳：</h4>
         <div class="input-group">
-          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳中/英文名稱、地區" aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
+          <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳中(英)文名稱、地區" aria-label="Restaurant Name..." value="{{keyword}}" aria-describedby="search-button">
           <div class="input-group-append">
             <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
           </div>
@@ -87,7 +87,7 @@
               <div class="d-flex justify-content-end">
                 <a type="button" class="btn btn-outline-danger btn-sm mx-1" href="/restaurants/{{ this._id }}/edit"><i class="fas fa-edit"></i></a>
                 <a type="button" class="btn btn-outline-danger btn-sm mx-1" href="/restaurants/{{ this._id }}"><i class="fas fa-info-circle"></i></a>
-                <form action="/restaurants/{{ this._id }}/delete" method="POST">
+                <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST">
                   <button class="btn btn-danger btn-sm mx-1" type="submit"><i class="fas fa-trash-alt"></i></button>
                 </form>
               </div>
