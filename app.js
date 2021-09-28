@@ -1,20 +1,14 @@
 // require packages used in the project ///
 const express = require('express')
 const exphbs = require('express-handlebars')
-const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
 const routes = require('./routes')
+require('./config/mongoose')
+
 const app = express()
 const port = 3000
-
-// connect to Database ///
-mongoose.connect('mongodb://localhost/restaurant-list')
-const db = mongoose.connection
-
-db.on('error', () => { console.log('MongoDB error!') })
-db.once('open', () => { console.log('MongoDB connected!') })
 
 // setting template engine ///
 app.engine('hbs', exphbs({
@@ -33,7 +27,7 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: true }))
 // setting method override ///
 app.use(methodOverride('_method'))
-// setting router
+// setting router ///
 app.use(routes)
 
 // start and listen on the Express server ///
