@@ -30,7 +30,7 @@ cd ~/mongodb/bin/
 ```
 ./mongod --dbpath <path to mongodb-data directory>
 ```
-- MongoDB has started successfully, while the terminal shows `waiting for connections on port 27017`.
+- While the terminal shows `waiting for connections on port 27017`, MongoDB has started successfully.
 4. Insert seeder
 ```
 npm run seed
