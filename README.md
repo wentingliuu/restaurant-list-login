@@ -8,7 +8,9 @@ with restaurant's name, address, phone, image, category, rating, and so on.
 *  READ: get the restaurant's detail info by clicking the detail button
 *  Update: you may update the info whenever you want by clicking the edit button
 *  Delete: you can remove the restaurant from your list by clicking the delete button
-*  Search: there's a search bar at the home page for you to search the specific one by keyword or category
+*  Search: there's a search bar at the home page for you to search the specific restaurants by keyword or location
+*  Sort: sort the restaurant list in ascending or descending order by name
+*  Filter: filter the restaurant list by category or rating
 
 ## Installation and Execution
 1.  Clone the files to your computer
@@ -22,11 +24,19 @@ cd restaurant-list-crud
 ```
 npm install
 ```
-3. Insert seeder
+3. Run MongoDB Server
+```
+cd ~/mongodb/bin/
+```
+```
+./mongod --dbpath <path to mongodb-data directory>
+```
+MongoDB has started successfully, while the terminal shows `waiting for connections on port 27017`
+4. Insert seeder
 ```
 npm run seed
 ```
-4. Run the project
+5. Run the project
 ```
 npm run dev
 ```
@@ -39,3 +49,5 @@ While the terminal returns `Express is listening on localhost:3000`, please go t
 *  [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) - template engine
 *  [MongoDB](https://www.mongodb.com/) - document-oriented database
 *  [Mongoose](https://mongoosejs.com/) - MongoDB object modeling tool(OBM)
+*  [body-parser](https://www.npmjs.com/package/body-parser) - middleware
+*  [method-override](https://www.npmjs.com/package/method-override) - middleware
