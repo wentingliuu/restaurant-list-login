@@ -17,9 +17,9 @@
 
 {{#if restaurants}}
 
-  <form action="/filter?method=PUT" method="POST" class="d-flex mt-5 mx-auto justify-content-between align-items-center" style="max-width: 40vw;" id="filter">
+  <form action="/filter?method=PUT" method="POST" class="d-flex mt-5 mx-auto justify-content-between align-items-center" style="max-width: 40vw;" id="filter" onchange="filter.submit()">
     <div class="row">
-      <select class="form-select btn btn-outline-danger btn-sm" id="sort" name="sort" onchange="filter.submit()">
+      <select class="form-select btn btn-outline-danger btn-sm" id="sort" name="sort">
         <option value="default" {{{equal sort 'default' }}}>排序</option>
         <option value="name_asc" {{{equal sort 'name_asc' }}}> 名稱 (A→Z)</option>
         <option value="name_desc" {{{equal sort 'name_desc' }}}> 名稱 (Z→A)</option>
@@ -30,7 +30,7 @@
     <div class="row align-items-center">
       <span class="mr-2" style="color: #dc3545; font-size: 16px; font-weight:500;"> 篩選條件： </span>
       <div class="mx-1">
-        <select class="form-select btn btn-outline-danger btn-sm" id="category" name="category" onchange="filter.submit()">
+        <select class="form-select btn btn-outline-danger btn-sm" id="category" name="category" >
           <option value="." {{{equal category '.' }}}>類別</option>
           <option {{{equal category '中東料理' }}}>中東料理</option>
           <option {{{equal category '日本料理' }}}>日本料理</option>
@@ -41,7 +41,7 @@
         </select>
       </div>
       <div class="mx-1">
-        <select class="form-select btn btn-outline-danger btn-sm" id="rating" name="rating" onchange="filter.submit()">
+        <select class="form-select btn btn-outline-danger btn-sm" id="rating" name="rating">
           <option value="0" {{{equal rating '0' }}}>評分</option>
           <option value="3.5" {{{equal rating '3.5'}}}>≥ 3.5顆星</option>
           <option value="4" {{{equal rating '4'}}}>≥ 4顆星</option>
