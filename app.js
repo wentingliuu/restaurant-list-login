@@ -17,6 +17,11 @@ app.engine('hbs', exphbs({
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true
+  },
+  helpers: {
+    equal: function (a, b) {
+      if (a === b) return 'selected'
+    }
   }
 }
 ))

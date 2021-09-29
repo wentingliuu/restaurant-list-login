@@ -23,26 +23,23 @@ router.get('/search', (req, res) => {
     .catch(error => console.log(error))
 })
 // sort
-router.get('/sort/:result', (req, res) => {
-  const filter = req.params.result.split('_')[0]
-  const sub = req.params.result.split('_')[1]
-  if (filter === 'name') {
-    Restaurant.find()
-      .lean()
-      .sort({ [filter]: sub })
-      .then(restaurants => res.render('index', { restaurants, sort: sub }))
-      .catch(error => console.error(error))
-  } else if (filter === 'category') {
-    Restaurant.find({ [filter]: { $regex: sub, $options: 'i' } })
-      .lean()
-      .then(restaurants => res.render('index', { restaurants, [filter]: sub }))
-      .catch(error => console.log(error))
-  } else if (filter === 'rating') {
-    Restaurant.find({ [filter]: { $gte: sub } })
-      .lean()
-      .then(restaurants => res.render('index', { restaurants, [filter]: sub }))
-      .catch(error => console.log(error))
+router.post('/filter', (req, res) => {
+  const { sort, category, rating } = req.body
+  const sortRule = {
+    default: { _id: 'asc' },
+    name_asc: { name: 'asc' },
+    name_desc: { name: 'desc' },
+    rating_asc: { rating: 'asc' },
+    rating_desc: { rating: 'desc' }
   }
+  Restaurant.find({
+    $and: [{ category: { $regex: category, $options: 'i' } },
+      { rating: { $gte: rating } }]
+  })
+    .sort(sortRule[sort])
+    .lean()
+    .then(restaurants => res.render('index', { restaurants, sort, category, rating }))
+    .catch(error => console.log(error))
 })
 
 module.exports = router

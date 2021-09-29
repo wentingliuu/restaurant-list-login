@@ -17,53 +17,43 @@
 
 {{#if restaurants}}
 
-<div class="d-flex m-auto justify-content-between align-items-center" style="max-width: 750px;">
-  <div class="d-flex justify-content-center mt-5 mx-5">
-    <a class="btn btn-danger btn-sm" href="./restaurants/new" role="button"><i class="fas fa-plus"></i> 新增餐廳</a>
-  </div>
-  <div class="d-flex justify-content-center align-items-center mt-5 mx-5">
-    <span style="color: #dc3545; font-size: 16px; font-weight:500;"> 篩選條件：</span>
-    <div class="dropdown mx-1">
-      <button class="btn btn-outline-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{#if sort}} {{ sort }} {{ else }} Sort {{/if}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/sort/name_asc">A-Z</a>
-        <a class="dropdown-item" href="/sort/name_desc">Z-A</a>
+  <form action="/filter?method=PUT" method="POST" class="d-flex mt-5 mx-auto justify-content-between align-items-center" style="max-width: 40vw;" id="filter">
+    <div class="row">
+      <select class="form-select btn btn-outline-danger btn-sm" id="sort" name="sort" onchange="filter.submit()">
+        <option value="default" {{{equal sort 'default' }}}>排序</option>
+        <option value="name_asc" {{{equal sort 'name_asc' }}}> 名稱 (A→Z)</option>
+        <option value="name_desc" {{{equal sort 'name_desc' }}}> 名稱 (Z→A)</option>
+        <option value="rating_asc" {{{equal sort 'rating_asc' }}}> 評分 (1→5)</option>
+        <option value="rating_desc" {{{equal sort 'rating_desc' }}}> 評分 (5→1)</option>
+      </select>
+    </div>
+    <div class="row align-items-center">
+      <span class="mr-2" style="color: #dc3545; font-size: 16px; font-weight:500;"> 篩選條件： </span>
+      <div class="mx-1">
+        <select class="form-select btn btn-outline-danger btn-sm" id="category" name="category" onchange="filter.submit()">
+          <option value="." {{{equal category '.' }}}>類別</option>
+          <option {{{equal category '中東料理' }}}>中東料理</option>
+          <option {{{equal category '日本料理' }}}>日本料理</option>
+          <option {{{equal category '義式餐廳' }}}>義式餐廳</option>
+          <option {{{equal category '美式' }}}>美式</option>
+          <option {{{equal category '酒吧' }}}>酒吧</option>
+          <option {{{equal category '咖啡' }}}>咖啡</option>
+        </select>
+      </div>
+      <div class="mx-1">
+        <select class="form-select btn btn-outline-danger btn-sm" id="rating" name="rating" onchange="filter.submit()">
+          <option value="0" {{{equal rating '0' }}}>評分</option>
+          <option value="3.5" {{{equal rating '3.5'}}}>≥ 3.5顆星</option>
+          <option value="4" {{{equal rating '4'}}}>≥ 4顆星</option>
+          <option value="4.5" {{{equal rating '4.5'}}}>≥ 4.5顆星</option>
+          <option value="5" {{{equal rating '5'}}}>5顆星</option>
+        </select>
+      </div>
+      <div class="mx-1">
+        <a class="btn btn-danger btn-sm" href="/">Clear</a>
       </div>
     </div>
-    <div class="dropdown mx-1">
-      <button class="btn btn-outline-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{#if category}} {{ category }} {{ else }} Category {{/if}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/sort/category_中東料理">中東料理</a>
-        <a class="dropdown-item" href="/sort/category_日本料理">日本料理</a>
-        <a class="dropdown-item" href="/sort/category_義式餐廳">義式餐廳</a>
-        <a class="dropdown-item" href="/sort/category_美式">美式</a>
-        <a class="dropdown-item" href="/sort/category_酒吧">酒吧</a>
-        <a class="dropdown-item" href="/sort/category_咖啡">咖啡</a>
-      </div>
-    </div>
-    <div class="dropdown mx-1">
-      <button class="btn btn-outline-danger btn-sm dropdown-toggle" type="button" id="dropdownMenuButton"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        {{#if rating}} ≥ {{ rating }} 顆星 {{ else }} Rating {{/if}}
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/sort/rating_3">≥ 3顆星</a>
-        <a class="dropdown-item" href="/sort/rating_3.5">≥ 3.5顆星</a>
-        <a class="dropdown-item" href="/sort/rating_4">≥ 4顆星</a>
-        <a class="dropdown-item" href="/sort/rating_4.5">≥ 4.5顆星</a>
-        <a class="dropdown-item" href="/sort/rating_5">5顆星</a>
-      </div>
-    </div>
-    <div class="d-flex mx-1">
-      <a class="btn btn-danger btn-sm" href="/">Clear</a>
-    </div>
-  </div>
-</div>
+  </form>
 
 <!-- restaurant list -->
 <div class="container mt-5 mb-2">
