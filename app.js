@@ -1,10 +1,13 @@
 // require packages used in the project ///
 const express = require('express')
+const session = require('express-session')
 const exphbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 
 const routes = require('./routes')
+
+const usePassport = require('./config/passport')
 require('./config/mongoose')
 
 const app = express()
@@ -26,12 +29,20 @@ app.engine('hbs', exphbs({
 }
 ))
 app.set('view engine', 'hbs')
+// setting express-session ///
+app.use(session({
+  secret: 'RestaurantSecret',
+  resave: false,
+  saveUninitialized: true
+}))
 // setting static files ///
 app.use(express.static('public'))
 // setting body parser ///
 app.use(bodyParser.urlencoded({ extended: true }))
 // setting method override ///
 app.use(methodOverride('_method'))
+// use passport ///
+usePassport(app)
 // setting router ///
 app.use(routes)
 
