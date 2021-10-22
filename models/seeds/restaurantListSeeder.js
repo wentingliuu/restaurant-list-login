@@ -17,5 +17,5 @@ db.once('open', () => {
       description: restaurantList[i].description
     })
   }
-  console.log('Date created!')
+  console.log('Data created!')
 })

@@ -78,7 +78,7 @@
                 <a type="button" class="btn btn-outline-danger btn-sm mx-1" href="/restaurants/{{ this._id }}/edit"><i class="fas fa-edit"></i></a>
                 <a type="button" class="btn btn-outline-danger btn-sm mx-1" href="/restaurants/{{ this._id }}"><i class="fas fa-info-circle"></i></a>
                 <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST">
-                  <button class="btn btn-danger btn-sm mx-1" type="submit"><i class="fas fa-trash-alt"></i></button>
+                  <button class="btn btn-danger btn-sm mx-1" type="submit" onclick="if(confirm('確認將此餐廳從清單移除？')) return true; else return false"><i class="fas fa-trash-alt"></i></button>
                 </form>
               </div>
             </div>
