@@ -3,8 +3,7 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   name: {
-    type: String,
-    default: '吃貨' // set default value for NAME
+    type: String
   },
   email: {
     type: String,
