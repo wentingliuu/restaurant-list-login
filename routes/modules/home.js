@@ -5,7 +5,7 @@ const Restaurant = require('../../models/restaurantSchema')
 
 // index.hbs
 router.get('/', (req, res) => {
-  Restaurant.find()
+  Restaurant.find({ userId: req.user._id })
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.error(error))
@@ -13,10 +13,13 @@ router.get('/', (req, res) => {
 // search
 router.get('/search', (req, res) => {
   const keyword = req.query.keyword.trim().toLowerCase()
-  Restaurant.find({
-    $or: [{ name: { $regex: keyword, $options: 'i' } },
-      { name_en: { $regex: keyword, $options: 'i' } },
-      { location: { $regex: keyword, $options: 'i' } }]
+  return Restaurant.find({
+    $and: [{ userId: req.user._id },
+      {
+        $or: [{ name: { $regex: keyword, $options: 'i' } },
+          { nameEn: { $regex: keyword, $options: 'i' } },
+          { location: { $regex: keyword, $options: 'i' } }]
+      }]
   })
     .lean()
     .then(restaurants => res.render('index', { restaurants, keyword }))
@@ -32,8 +35,9 @@ router.post('/filter', (req, res) => {
     rating_asc: { rating: 'asc' },
     rating_desc: { rating: 'desc' }
   }
-  Restaurant.find({
-    $and: [{ category: { $regex: category, $options: 'i' } },
+  return Restaurant.find({
+    $and: [{ userId: req.user._id },
+      { category: { $regex: category, $options: 'i' } },
       { rating: { $gte: rating } }]
   })
     .sort(sortRule[sort])
