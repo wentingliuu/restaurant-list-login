@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 const User = require('../../models/userSchema')
 
@@ -19,7 +20,6 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
-  console.log(name, email, password, confirmPassword)
   User.findOne({ email }).then(user => {
     if (user) {
       console.log('User already exists.')
@@ -29,15 +29,17 @@ router.post('/register', (req, res) => {
         password,
         confirmPassword
       })
-    } else {
-      return User.create({
+    }
+    return bcrypt
+      .genSalt(10)
+      .then(salt => bcrypt.hash(password, salt))
+      .then(hash => User.create({
         name: name || '吃貨', // set default value for NAME
         email,
-        password
-      })
-        .then(() => res.redirect('/'))
-        .catch(err => console.log(err))
-    }
+        password: hash // 用雜湊值取代原本的使用者密碼
+      }))
+      .then(() => res.redirect('/'))
+      .catch(err => console.log(err))
   })
 })
 
