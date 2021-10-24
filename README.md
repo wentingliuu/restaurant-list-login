@@ -3,7 +3,7 @@ A website built with [Node.js](https://nodejs.org/en/), [Express.js](https://exp
 
 Please register an account via email address first, or you may quick login with Facebook & Google, cause all the restaurant list would be only keep in your own account.
 
-🌟 Try to run this project on **[HEROKU](https://lit-tor-79004.herokuapp.com)** !!!
+🌟  Try this project on **[HEROKU](https://lit-tor-79004.herokuapp.com)** !!!
 
 ## Features
 *  **REGISTER:** sign up an account with name, email, password
