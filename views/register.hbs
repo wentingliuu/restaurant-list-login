@@ -1,7 +1,7 @@
 <h1 class="mb-1 restaurant-show-title">註冊帳號</h1>
 <div class="row mt-3">
   <div class="col-md-4 m-auto">
-    <div class="card card-body">
+    <div class="card card-body mb-5">
       {{> message}}
       <form action="/users/register" method="POST">
         <div class="form-group">
@@ -9,21 +9,30 @@
           <input type="text" id="name" name="name" class="form-control" placeholder="Enter name" value="{{ name }}">
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
+          <label for="email">Email<span class="text-danger"> *required</span></label>
           <input type="email" id="email" name="email" class="form-control" placeholder="Enter email" value="{{ email }}">
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">Password<span class="text-danger"> *required</span></label>
           <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" value="{{ password }}">
         </div>
         <div class="form-group">
-          <label for="confirmPassword">Confirm Password</label>
+          <label for="confirmPassword">Confirm Password<span class="text-danger"> *required</span></label>
           <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
             placeholder="Confirm password" value="{{ confirmPassword }}">
         </div>
         <button type="submit" class="btn btn-info btn-block">Register</button>
+        <div class="text-center my-4">
+          <hr>
+          <p class="text-muted">快速登入</p>
+        </div>
+        <div class="login-partners-icons">
+          <h4 class="text-center">
+            <a href="/auth/facebook"><i class="fab fa-facebook fa-lg mr-2 text-info"></i></a>
+          </h4>
+        </div>
       </form>
-      <p class="lead mt-4">
+      <p class="mt-4">
         Have an account? <a href="/users/login">Login</a>
       </p>
     </div>

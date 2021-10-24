@@ -24,7 +24,7 @@ router.post('/register', (req, res) => {
   const errors = []
 
   if (!email) {
-    errors.push({ message: '信箱為必填欄位！' })
+    errors.push({ message: 'email 為必填欄位！' })
   }
   if (!password || !confirmPassword) {
     errors.push({ message: '密碼與確認密碼為必填欄位！' })
@@ -59,9 +59,12 @@ router.post('/register', (req, res) => {
       .then(hash => User.create({
         name: name || '吃貨', // set default value for NAME
         email,
-        password: hash // 用雜湊值取代原本的使用者密碼
+        password: hash
       }))
-      .then(() => res.redirect('/'))
+      .then(() => {
+        req.flash('success_msg', '已註冊成功，請登入！')
+        res.redirect('/users/login')
+      })
       .catch(err => console.log(err))
   })
 })
