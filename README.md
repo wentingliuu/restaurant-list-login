@@ -1,27 +1,30 @@
-# Restaurant List (CRUD)
+# Restaurant List (Login)
 A website built with [Node.js](https://nodejs.org/en/), [Express.js](https://expressjs.com/), and [MongoDB](https://www.mongodb.com/) for you to  keep all your favorite restaurants with restaurant's name, address, phone, image, category, rating, and so on.
 
 Please register an account via email address first, or you may quick login with Facebook & Google, cause all the restaurant list would be only keep in your own account.
 
+
 ## Features
-*  REGISTER: sign up an account by inputting name, email, password
-*  LOGIN: sign in to review your own restaurant list
-*  LOGIN with 3rd-party account: quick login with Facebook or Google account
-*  LOGOUT: logout the account by clicking the logout button
-*  CREATE: write down the restaurant info at the create page 
-*  READ: review your full restaurant list at the home page
-*  READ: get the restaurant's detail info by clicking the detail button
-*  UPDATE: you may update the info whenever you want by clicking the edit button
-*  DELETE: you can remove the restaurant from your list by clicking the delete button
-*  SEARCH: there's a search bar at the home page for you to search the specific restaurants by keyword or location
-*  SORT: sort the restaurant list in ascending or descending order by name
-*  FILTER: filter the restaurant list by category or rating
+*  **REGISTER:** sign up an account with name, email, password
+*  **LOGIN:** sign in to review your own restaurant list
+*  **LOGIN with 3rd-party account:** quick login with Facebook or Google account
+*  **LOGOUT:** sign out the account by clicking the logout button
+*  **CREATE:** write down the restaurant info at the create page 
+*  **READ:** review your full restaurant list at the home page
+*  **READ:** get the restaurant's detail info by clicking the detail button
+*  **UPDATE:** you may update the info whenever you want by clicking the edit button
+*  **DELETE:** you can remove the restaurant from your list by clicking the delete button
+*  **SEARCH:** there's a search bar at the home page for you to search the specific restaurants by keyword or location
+*  **SORT:** sort the restaurant list in ascending or descending order by name
+*  **FILTER:** filter the restaurant list by category or rating
+
 
 ## Screenshots
-*  REGISTER & LOGIN PAGE
+###### REGISTER & LOGIN PAGE
 ![HOME PAGE](https://github.com/wentingliuu/restaurant-list-login/blob/main/public/img/registerandlogin.png)
-*  HOME PAGE
+###### HOME PAGE
 ![SHORTEN PAGE](https://github.com/wentingliuu/restaurant-list-login/blob/main/public/img/home.png)
+
 
 ## Installation and Execution
 1.  Clone the files to your computer
@@ -39,7 +42,7 @@ npm install
 ```
 touch .env
 ```
-- Please see [.env.example](https://www.npmjs.com/package/bcryptjs) for reference.
+- Please see [.env.example](https://github.com/wentingliuu/restaurant-list-login/blob/main/.env.example) for reference.
 - Please get your own Facebook & Google API key from [Facebook](https://developers.facebook.com/) & [Google](https://console.cloud.google.com/apis/dashboard/)
 4. Run MongoDB Server
 ```
@@ -58,6 +61,15 @@ npm run seed
 npm run dev
 ```
 - While the terminal returns `Express is listening on localhost:3000`, please visit http://localhost:3000 on your browser.
+
+## Dummy user data
+###### After inserting the seeder, you may use the following dummy data to experience this web application.
+Email | Password | Restaurant List
+------------ | -------------
+user1@example.com | 12345678 | #1, #2, #3
+user2@example.com | 12345678 | #4, #5, #6
+root@example.com | 12345678 | #1, #2, #3, #4, #5, #6, #7, #8, #9
+
 
 ## Prerequisites
 *  [Visual Studio Code](https://code.visualstudio.com/) - development environment
