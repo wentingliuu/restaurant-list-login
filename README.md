@@ -3,16 +3,7 @@ A website built with [Node.js](https://nodejs.org/en/), [Express.js](https://exp
 
 Please register an account via email address first, or you may quick login with Facebook & Google, cause all the restaurant list would be only keep in your own account.
 
-🌟 Try to run this project on [HEROKU](https://lit-tor-79004.herokuapp.com)!!!
-
-## Dummy user data
-#### After inserting the seeder, you may use the following dummy data to experience this web application.
-| Email              | Password | Restaurant List                    |
-| -------------------| ---------| -----------------------------------|
-| user1@example.com  | 12345678 | #1, #2, #3                         |
-| user2@example.com  | 12345678 | #4, #5, #6                         |
-| root@example.com   | 12345678 | #1, #2, #3, #4, #5, #6, #7, #8, #9 |
-
+🌟 Try to run this project on **[HEROKU](https://lit-tor-79004.herokuapp.com)** !!!
 
 ## Features
 *  **REGISTER:** sign up an account with name, email, password
@@ -71,6 +62,15 @@ npm run seed
 npm run dev
 ```
 - While the terminal returns `Express is listening on localhost:3000`, please visit http://localhost:3000 on your browser.
+
+
+## Dummy user data
+#### After inserting the seeder, you may use the following dummy data to experience this web application.
+| Email              | Password | Restaurant List                    |
+| -------------------| ---------| -----------------------------------|
+| user1@example.com  | 12345678 | #1, #2, #3                         |
+| user2@example.com  | 12345678 | #4, #5, #6                         |
+| root@example.com   | 12345678 | #1, #2, #3, #4, #5, #6, #7, #8, #9 |
 
 
 ## Prerequisites
