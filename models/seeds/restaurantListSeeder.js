@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const db = require('../../config/mongoose')
 const bcrypt = require('bcryptjs')
 
@@ -33,7 +37,8 @@ db.once('open', () => {
         .then(hash => User.create({
           name: seeder.name || '吃貨',
           email: seeder.email,
-          password: hash
+          password: hash,
+          loginMethod: 'email'
         }))
         .then(user => {
           const userRestaurantList = []

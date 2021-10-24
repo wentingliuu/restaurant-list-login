@@ -42,7 +42,10 @@ router.post('/register', (req, res) => {
     })
   }
 
-  User.findOne({ email }).then(user => {
+  User.findOne({
+    $and: [{ email },
+      { loginMethod: 'email' }]
+  }).then(user => {
     if (user) {
       errors.push({ message: '此 email 已註冊過！' })
       return res.render('register', {
@@ -59,7 +62,8 @@ router.post('/register', (req, res) => {
       .then(hash => User.create({
         name: name || '吃貨', // set default value for NAME
         email,
-        password: hash
+        password: hash,
+        loginMethod: 'email'
       }))
       .then(() => {
         req.flash('success_msg', '已註冊成功，請登入！')
