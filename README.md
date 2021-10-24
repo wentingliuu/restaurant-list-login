@@ -3,7 +3,7 @@ A website built with [Node.js](https://nodejs.org/en/), [Express.js](https://exp
 
 Please register an account via email address first, or you may quick login with Facebook & Google, cause all the restaurant list would be only keep in your own account.
 
-🌟 To try this project, you could use the **[dummy data](https://github.com/wentingliuu/restaurant-list-login#dummy-user-data)** to login. 
+🌟 To try this project, you could use the **[dummy data](https://github.com/wentingliuu/restaurant-list-login#dummy-user-data)** to login.\n
 🌟 This project is deployed on **[HEROKU](https://lit-tor-79004.herokuapp.com)** as well !!!
 
 ## Features
