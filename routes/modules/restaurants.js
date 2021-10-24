@@ -14,34 +14,26 @@ router.post('/', (req, res) => {
 })
 // detail.hbs (read)
 router.get('/:id', (req, res) => {
-  const userId = req.user._id
-  const id = req.params.id
-  return Restaurant.findOne({ userId, id })
+  return Restaurant.findOne({ _id: req.params.id, userId: req.user._id })
     .lean()
     .then(restaurant => res.render('detail', { restaurant }))
     .catch(error => console.log(error))
 })
 // edit.hbs (update)
 router.get('/:id/edit', (req, res) => {
-  const userId = req.user._id
-  const id = req.params.id
-  return Restaurant.findOne({ userId, id })
+  return Restaurant.findOne({ _id: req.params.id, userId: req.user._id })
     .lean()
     .then(restaurant => res.render('edit', { restaurant }))
     .catch(error => console.log(error))
 })
 router.put('/:id', (req, res) => {
-  const userId = req.user._id
-  const id = req.params.id
-  return Restaurant.findOneAndUpdate({ userId, id }, { $set: req.body })
-    .then(() => res.redirect(`/restaurants/${id}`))
+  return Restaurant.findOneAndUpdate({ _id: req.params.id, userId: req.user._id }, { $set: req.body })
+    .then(() => res.redirect(`/restaurants/${req.params.id}`))
     .catch(error => console.log(error))
 })
 // delete
 router.delete('/:id', (req, res) => {
-  const userId = req.user._id
-  const id = req.params.id
-  return Restaurant.findOneAndRemove({ userId, id })
+  return Restaurant.findOneAndRemove({ _id: req.params.id, userId: req.user._id })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
