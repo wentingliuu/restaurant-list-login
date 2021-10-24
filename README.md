@@ -20,9 +20,9 @@ Please register an account via email address first, or you may quick login with 
 
 
 ## Screenshots
-###### REGISTER & LOGIN PAGE
+#### REGISTER & LOGIN PAGE
 ![HOME PAGE](https://github.com/wentingliuu/restaurant-list-login/blob/main/public/img/registerandlogin.png)
-###### HOME PAGE
+#### HOME PAGE
 ![SHORTEN PAGE](https://github.com/wentingliuu/restaurant-list-login/blob/main/public/img/home.png)
 
 
@@ -63,13 +63,12 @@ npm run dev
 - While the terminal returns `Express is listening on localhost:3000`, please visit http://localhost:3000 on your browser.
 
 ## Dummy user data
-###### After inserting the seeder, you may use the following dummy data to experience this web application.
-Email | Password | Restaurant List
------------- | -------------
-user1@example.com | 12345678 | #1, #2, #3
-user2@example.com | 12345678 | #4, #5, #6
-root@example.com | 12345678 | #1, #2, #3, #4, #5, #6, #7, #8, #9
-
+#### After inserting the seeder, you may use the following dummy data to experience this web application.
+| Email              | Password | Restaurant List                    |
+| -------------------| ---------| -----------------------------------|
+| user1@example.com  | 12345678 | #1, #2, #3                         |
+| user2@example.com  | 12345678 | #4, #5, #6                         |
+| root@example.com   | 12345678 | #1, #2, #3, #4, #5, #6, #7, #8, #9 |
 
 ## Prerequisites
 *  [Visual Studio Code](https://code.visualstudio.com/) - development environment
