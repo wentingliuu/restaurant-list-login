@@ -8,25 +8,7 @@ const bcrypt = require('bcryptjs')
 const User = require('../userSchema')
 const Restaurant = require('../restaurantSchema')
 const restaurantList = require('./restaurant.json').results
-
-const seeders = [
-  {
-    email: 'user1@example.com',
-    password: '12345678',
-    index: [1, 2, 3]
-  },
-  {
-    email: 'user2@example.com',
-    password: '12345678',
-    index: [4, 5, 6]
-  },
-  {
-    name: '老饕',
-    email: 'root@example.com',
-    password: '12345678',
-    index: [1, 2, 3, 4, 5, 6, 7, 8, 9]
-  }
-]
+const seeders = require('./user.json').seeders
 
 db.once('open', () => {
   Promise.all(
