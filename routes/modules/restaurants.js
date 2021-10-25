@@ -7,8 +7,7 @@ const Restaurant = require('../../models/restaurantSchema')
 router.get('/new', (req, res) => { return res.render('new') })
 router.post('/', (req, res) => {
   const userId = req.user._id
-  const { name, nameEn, category, image, location, phone, googleMap, rating, description } = req.body
-  return Restaurant.create({ name, nameEn, category, image, location, phone, googleMap, rating, description, userId })
+  return Restaurant.create({ ...req.body, userId })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
